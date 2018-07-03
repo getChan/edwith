@@ -1,31 +1,21 @@
-import cx_Oracle
+import sqlite3
 
-conn = cx_Oracle.connect('ngc438/pass123@localhost/orcl')
-
+conn = sqlite3.connect('emaildb.sqlite')
 cur = conn.cursor()
 
-cur.execute('''
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE counts';
-EXCEPTION
-   WHEN OTHERS THEN
-      IF SQLCODE != -942 THEN
-         RAISE;
-      END IF;
-END;''')
+cur.execute('DROP TABLE IF EXISTS Counts')
 
 cur.execute('''
-CREATE TABLE Counts (name VARCHAR2(20), count INTEGER)''')
+CREATE TABLE Counts (email TEXT, count INTEGER)''')
 
-fname = input('Enter file name :')
-if(len(fname) < 1):
-    fname = 'mbox-short.txt'
+fname = input('Enter file name: ')
+if (len(fname) < 1): fname = 'mbox-short.txt'
 fh = open(fname)
 for line in fh:
     if not line.startswith('From: '): continue
     pieces = line.split()
     email = pieces[1]
-    cur.execute('SELECT count FROM Counts WHERE email = %s ', (1, email))
+    cur.execute('SELECT count FROM Counts WHERE email = ? ', (email,))
     row = cur.fetchone()
     if row is None:
         cur.execute('''INSERT INTO Counts (email, count)
@@ -42,4 +32,3 @@ for row in cur.execute(sqlstr):
     print(str(row[0]), row[1])
 
 cur.close()
-conn.close()
