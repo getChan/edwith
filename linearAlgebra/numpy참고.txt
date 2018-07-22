@@ -1,0 +1,6 @@
+Python Numpy Tutorial
+http://cs231n.github.io/python-numpy-tutorial/
+스탠포드 강의 CS231n에서 제공되는 Numpy 튜토리얼 강의입니다.
+Linear algebra cheat sheet for deep learning
+https://towardsdatascience.com/linear-algebra-cheat-sheet-for-deep-learning-cd67aba4526c
+교수님께서 참고로 추천해주시는 선형대수 치트시트 블로그 입니다.
