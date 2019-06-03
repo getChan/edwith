@@ -20,7 +20,7 @@
 ## Simple Error Bound
   Probably Approximate Correct (PAC) learning
 
-# Maximum A Posteriori estimation
+# Maximum A Posteriori estimationgo
 ## Incorporating Prior Knowledge
 - $P(\theta|D) =\frac{P(D|\theta)P(\theta)}{P(D)}$
 - $Posterior =\frac{Likelihood * Prior Knowledge}{Normailizing Constant}$
